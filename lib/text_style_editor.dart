@@ -1,6 +1,7 @@
 library text_style_editor;
 
 import 'package:flutter/material.dart';
+import 'package:text_style_editor/src/text_editing.dart';
 import 'src/font_color_tool.dart';
 import 'src/font_family_tool.dart';
 import 'src/font_size_tool.dart';
@@ -8,8 +9,10 @@ import 'src/custom_text_style.dart';
 import 'src/text_alignment_tool.dart';
 
 class TextStyleEditor extends StatefulWidget {
+  var text;
   final TextStyle textStyle;
   final ValueChanged<TextStyle> onTextStyleChanged;
+  final ValueChanged<String> onTextChanged;
   final ValueChanged<TextAlign> onTextAlignChanged;
   final Color primaryColor;
   final Color secondaryColor;
@@ -24,6 +27,8 @@ class TextStyleEditor extends StatefulWidget {
     this.secondaryColor = Colors.black12,
     this.backgroundColor = Colors.white,
     this.height,
+    this.text,
+    this.onTextChanged,
   });
 
   @override
@@ -35,14 +40,15 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
   final Color _inActiveToolColor = Colors.grey;
   TextStyle _textStyle;
   CustomTextStyle _customTextStyle;
-  int _currentToolIndex = 1;
+  int _currentToolIndex = 2;
   Widget _currentTool;
 
   @override
   void initState() {
     /// Set default TextStyle
-    _textStyle = widget.textStyle == null ? TextStyle() : widget.textStyle;
-
+    _textStyle =
+        widget.textStyle == null ? TextStyle(fontSize: 10.0) : widget.textStyle;
+    print(widget.textStyle);
     _customTextStyle = CustomTextStyle.from(_textStyle);
 
     _currentTool = FontFamilyTool(
@@ -58,9 +64,17 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
     widget.onTextStyleChanged(CustomTextStyle.to(_customTextStyle));
   }
 
+  void _onTextChanged(value) {
+    setState(() {
+      widget.text = value;
+      widget.onTextChanged(value);
+      print(value);
+    });
+  }
+
   void _onFontSizeChanged(value) {
     _customTextStyle = value;
-
+    print(value);
     widget.onTextStyleChanged(CustomTextStyle.to(_customTextStyle));
   }
 
@@ -73,21 +87,25 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
   void _changeToolIndex(int index) {
     setState(() {
       _currentToolIndex = index;
-
       if (_currentToolIndex == 1) {
+        _currentTool = TextEditing(
+          text: widget.text,
+          onTextChanged: _onTextChanged,
+        );
+      } else if (_currentToolIndex == 2) {
         // TODO: Pass selected font to `FontFamilyTool` class
         _currentTool = FontFamilyTool(
           defaultTextStyle: _customTextStyle,
           onTextStyleChanged: _onFontFamilyChanged,
         );
-      } else if (_currentToolIndex == 2) {
+      } else if (_currentToolIndex == 3) {
         _currentTool = FontSizeTool(
           defaultTextStyle: _customTextStyle,
           primaryColor: widget.primaryColor,
           secondaryColor: widget.secondaryColor,
           onTextStyleChanged: _onFontSizeChanged,
         );
-      } else if (_currentToolIndex == 4) {
+      } else if (_currentToolIndex == 5) {
         _currentTool = FontColorTool(
           defaultTextStyle: _customTextStyle,
           onTextStyleChanged: _onFontColorChanged,
@@ -111,6 +129,7 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                 top: 20,
                 left: constraints.maxWidth * 0.05,
                 right: constraints.maxWidth * 0.05,
+                bottom: 20,
               ),
               // width: constraints.maxWidth * 0.9,
               decoration: BoxDecoration(
@@ -123,7 +142,7 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                 children: [
                   IconButton(
                     icon: Icon(
-                      Icons.title,
+                      Icons.edit,
                       color: _currentToolIndex == 1
                           ? _activeToolColor
                           : _inActiveToolColor,
@@ -132,12 +151,21 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                   ),
                   IconButton(
                     icon: Icon(
-                      Icons.tune,
+                      Icons.title,
                       color: _currentToolIndex == 2
                           ? _activeToolColor
                           : _inActiveToolColor,
                     ),
                     onPressed: () => _changeToolIndex(2),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.tune,
+                      color: _currentToolIndex == 3
+                          ? _activeToolColor
+                          : _inActiveToolColor,
+                    ),
+                    onPressed: () => _changeToolIndex(3),
                   ),
                   TextAlignmentTool(
                     activeColor: _activeToolColor,
@@ -147,11 +175,11 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                   IconButton(
                     icon: Icon(
                       Icons.palette,
-                      color: _currentToolIndex == 4
+                      color: _currentToolIndex == 5
                           ? _activeToolColor
                           : _inActiveToolColor,
                     ),
-                    onPressed: () => _changeToolIndex(4),
+                    onPressed: () => _changeToolIndex(5),
                   ),
                 ],
               ),

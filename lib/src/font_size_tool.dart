@@ -34,9 +34,9 @@ class _FontSizeToolState extends State<FontSizeTool> {
         children: [
           /// FontSize slider
           _SliderValueSelector(
-            minValue: 1,
+            minValue: 10,
             maxValue: 100,
-            defaultValue: widget.defaultTextStyle.fontSize,
+            defaultValue: widget.defaultTextStyle.fontSize ?? 20,
             leftIcon: Icon(Icons.title, size: 15),
             rightIcon: Icon(Icons.title, size: 25),
             activeColor: widget.primaryColor,
@@ -44,7 +44,7 @@ class _FontSizeToolState extends State<FontSizeTool> {
             onValueChanged: (value) {
               /// Update font size
               textStyle.fontSize = value;
-
+              print(value);
               widget.onTextStyleChanged(textStyle);
             },
           ),
