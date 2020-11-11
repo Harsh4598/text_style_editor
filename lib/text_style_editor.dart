@@ -36,7 +36,7 @@ class TextStyleEditor extends StatefulWidget {
 }
 
 class _TextStyleEditorState extends State<TextStyleEditor> {
-  final Color _activeToolColor = Colors.black;
+  final Color _activeToolColor = Color(0xFF5CDB94);
   final Color _inActiveToolColor = Colors.grey;
   TextStyle _textStyle;
   CustomTextStyle _customTextStyle;

@@ -68,6 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: TextStyleEditor(
+                      backgroundColor: Color(0xFF05396B),
+                      primaryColor: Color(0xFF5CDB94),
+                      secondaryColor: Colors.white,
                       text: text,
                       height: 250,
                       textStyle: textStyle,

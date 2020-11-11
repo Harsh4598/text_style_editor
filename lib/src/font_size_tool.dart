@@ -37,8 +37,16 @@ class _FontSizeToolState extends State<FontSizeTool> {
             minValue: 10,
             maxValue: 100,
             defaultValue: widget.defaultTextStyle.fontSize ?? 20,
-            leftIcon: Icon(Icons.title, size: 15),
-            rightIcon: Icon(Icons.title, size: 25),
+            leftIcon: Icon(
+              Icons.title,
+              size: 15,
+              color: Colors.white,
+            ),
+            rightIcon: Icon(
+              Icons.title,
+              size: 25,
+              color: Colors.white,
+            ),
             activeColor: widget.primaryColor,
             inActiveColor: widget.secondaryColor,
             onValueChanged: (value) {
@@ -54,8 +62,16 @@ class _FontSizeToolState extends State<FontSizeTool> {
             minValue: 0,
             maxValue: 100,
             defaultValue: 0.0,
-            leftIcon: Icon(Icons.settings_ethernet, size: 20),
-            rightIcon: Icon(Icons.settings_ethernet, size: 20),
+            leftIcon: Icon(
+              Icons.settings_ethernet,
+              size: 20,
+              color: Colors.white,
+            ),
+            rightIcon: Icon(
+              Icons.settings_ethernet,
+              size: 20,
+              color: Colors.white,
+            ),
             activeColor: widget.primaryColor,
             inActiveColor: widget.secondaryColor,
             onValueChanged: (value) {
@@ -71,8 +87,16 @@ class _FontSizeToolState extends State<FontSizeTool> {
             minValue: 1,
             maxValue: 10,
             defaultValue: 1,
-            leftIcon: Icon(Icons.format_line_spacing, size: 20),
-            rightIcon: Icon(Icons.format_line_spacing, size: 20),
+            leftIcon: Icon(
+              Icons.format_line_spacing,
+              size: 20,
+              color: Colors.white,
+            ),
+            rightIcon: Icon(
+              Icons.format_line_spacing,
+              size: 20,
+              color: Colors.white,
+            ),
             activeColor: widget.primaryColor,
             inActiveColor: widget.secondaryColor,
             onValueChanged: (value) {

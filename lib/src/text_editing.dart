@@ -18,10 +18,11 @@ class _TextEditingState extends State<TextEditing> {
       children: [
         Container(
           margin: EdgeInsets.only(top: 10),
-          child: Text(
-            "Edit Text :",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-          ),
+          child: Text("Edit Text :",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white)),
         ),
         Container(
             margin: EdgeInsets.all(20),

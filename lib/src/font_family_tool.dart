@@ -72,6 +72,7 @@ class FontSelector extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
+          color: Colors.white,
           fontSize: 18,
           fontFamily: font,
           package: 'text_style_editor',
