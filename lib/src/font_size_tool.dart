@@ -52,7 +52,7 @@ class _FontSizeToolState extends State<FontSizeTool> {
             onValueChanged: (value) {
               /// Update font size
               textStyle.fontSize = value;
-              print(value);
+
               widget.onTextStyleChanged(textStyle);
             },
           ),
