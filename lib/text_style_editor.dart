@@ -48,7 +48,7 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
     /// Set default TextStyle
     _textStyle =
         widget.textStyle == null ? TextStyle(fontSize: 10.0) : widget.textStyle;
-    print(widget.textStyle);
+
     _customTextStyle = CustomTextStyle.from(_textStyle);
 
     _currentTool = FontFamilyTool(
@@ -68,13 +68,12 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
     setState(() {
       widget.text = value;
       widget.onTextChanged(value);
-      print(value);
     });
   }
 
   void _onFontSizeChanged(value) {
     _customTextStyle = value;
-    print(value);
+
     widget.onTextStyleChanged(CustomTextStyle.to(_customTextStyle));
   }
 
