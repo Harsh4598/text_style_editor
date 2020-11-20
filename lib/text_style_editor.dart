@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:text_style_editor/src/text_editing.dart';
 import 'src/font_color_tool.dart';
 import 'src/font_family_tool.dart';
-import 'src/font_size_tool.dart';
+
 import 'src/custom_text_style.dart';
-import 'src/text_alignment_tool.dart';
 
 class TextStyleEditor extends StatefulWidget {
   var text;
@@ -71,12 +70,6 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
     });
   }
 
-  void _onFontSizeChanged(value) {
-    _customTextStyle = value;
-
-    widget.onTextStyleChanged(CustomTextStyle.to(_customTextStyle));
-  }
-
   void _onFontColorChanged(value) {
     _customTextStyle = value;
 
@@ -92,19 +85,11 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
           onTextChanged: _onTextChanged,
         );
       } else if (_currentToolIndex == 2) {
-        // TODO: Pass selected font to `FontFamilyTool` class
         _currentTool = FontFamilyTool(
           defaultTextStyle: _customTextStyle,
           onTextStyleChanged: _onFontFamilyChanged,
         );
       } else if (_currentToolIndex == 3) {
-        _currentTool = FontSizeTool(
-          defaultTextStyle: _customTextStyle,
-          primaryColor: widget.primaryColor,
-          secondaryColor: widget.secondaryColor,
-          onTextStyleChanged: _onFontSizeChanged,
-        );
-      } else if (_currentToolIndex == 5) {
         _currentTool = FontColorTool(
           defaultTextStyle: _customTextStyle,
           onTextStyleChanged: _onFontColorChanged,
@@ -159,26 +144,12 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                   ),
                   IconButton(
                     icon: Icon(
-                      Icons.tune,
+                      Icons.palette,
                       color: _currentToolIndex == 3
                           ? _activeToolColor
                           : _inActiveToolColor,
                     ),
                     onPressed: () => _changeToolIndex(3),
-                  ),
-                  TextAlignmentTool(
-                    activeColor: _activeToolColor,
-                    inActiveColor: _inActiveToolColor,
-                    onTextAlignChanged: widget.onTextAlignChanged,
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.palette,
-                      color: _currentToolIndex == 5
-                          ? _activeToolColor
-                          : _inActiveToolColor,
-                    ),
-                    onPressed: () => _changeToolIndex(5),
                   ),
                 ],
               ),
