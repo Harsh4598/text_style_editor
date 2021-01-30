@@ -1,5 +1,3 @@
-library text_style_editor;
-
 import 'package:flutter/material.dart';
 import 'package:text_style_editor/src/text_editing.dart';
 import 'src/font_color_tool.dart';
@@ -17,7 +15,8 @@ class TextStyleEditor extends StatefulWidget {
   final Color secondaryColor;
   final backgroundColor;
   final double height;
-
+  final Color activeToolColor;
+  final Color inActiveToolColor;
   TextStyleEditor({
     @required this.onTextStyleChanged,
     @required this.onTextAlignChanged,
@@ -25,6 +24,8 @@ class TextStyleEditor extends StatefulWidget {
     this.primaryColor = Colors.black26,
     this.secondaryColor = Colors.black12,
     this.backgroundColor = Colors.white,
+    this.activeToolColor = Colors.black,
+    this.inActiveToolColor = Colors.white,
     this.height,
     this.text,
     this.onTextChanged,
@@ -35,8 +36,6 @@ class TextStyleEditor extends StatefulWidget {
 }
 
 class _TextStyleEditorState extends State<TextStyleEditor> {
-  final Color _activeToolColor = Color(0xFF05396B);
-  final Color _inActiveToolColor = Colors.grey;
   TextStyle _textStyle;
   CustomTextStyle _customTextStyle;
   int _currentToolIndex = 2;
@@ -45,6 +44,7 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
   @override
   void initState() {
     /// Set default TextStyle
+    print(widget.activeToolColor);
     _textStyle =
         widget.textStyle == null ? TextStyle(fontSize: 10.0) : widget.textStyle;
 
@@ -128,8 +128,8 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                     icon: Icon(
                       Icons.edit,
                       color: _currentToolIndex == 1
-                          ? _activeToolColor
-                          : _inActiveToolColor,
+                          ? widget.activeToolColor
+                          : widget.inActiveToolColor,
                     ),
                     onPressed: () => _changeToolIndex(1),
                   ),
@@ -137,8 +137,8 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                     icon: Icon(
                       Icons.title,
                       color: _currentToolIndex == 2
-                          ? _activeToolColor
-                          : _inActiveToolColor,
+                          ? widget.activeToolColor
+                          : widget.inActiveToolColor,
                     ),
                     onPressed: () => _changeToolIndex(2),
                   ),
@@ -146,8 +146,8 @@ class _TextStyleEditorState extends State<TextStyleEditor> {
                     icon: Icon(
                       Icons.palette,
                       color: _currentToolIndex == 3
-                          ? _activeToolColor
-                          : _inActiveToolColor,
+                          ? widget.activeToolColor
+                          : widget.inActiveToolColor,
                     ),
                     onPressed: () => _changeToolIndex(3),
                   ),

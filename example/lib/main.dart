@@ -183,6 +183,9 @@ class _HomePageState extends State<HomePage> {
                           child: Align(
                             alignment: Alignment.topCenter,
                             child: TextStyleEditor(
+                              activeToolColor: Color(0xFF30110D),
+                              backgroundColor: Colors.red,
+                              secondaryColor: Colors.amber,
                               height: 250,
                               textStyle: textStyle,
                               onTextStyleChanged: (value) {
