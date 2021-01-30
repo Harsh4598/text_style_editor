@@ -1,3 +1,5 @@
+library text_editor;
+
 import 'package:flutter/material.dart';
 import 'package:text_style_editor/src/text_editing.dart';
 import 'src/font_color_tool.dart';
